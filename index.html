@@ -110,6 +110,21 @@
       margin-top: 12px;
     }
 
+    .connected {
+      background: #10251a;
+      border: 1px solid #35d66f;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 15px;
+      color: #6cff9a;
+    }
+
+    .account {
+      color: white;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+
     .footer {
       text-align: center;
       color: #7d8995;
@@ -130,17 +145,29 @@
 
   <div class="card connect">
     <h2>Conectar TikTok</h2>
-    <p>Conectá tu cuenta de TikTok para utilizar Live Seguro.</p>
 
-    <a class="tiktok"
-       href="https://purple-pine-781d.joelcristianvillalba.workers.dev/">
-       Continuar con TikTok
+    <p id="connectionText">
+      Conectá tu cuenta de TikTok para utilizar Live Seguro.
+    </p>
+
+    <div id="connectedBox" class="connected" style="display:none;">
+      <div>✅ TikTok conectado</div>
+      <div id="accountName" class="account"></div>
+    </div>
+
+    <a
+      id="tiktokButton"
+      class="tiktok"
+      href="https://purple-pine-781d.joelcristianvillalba.workers.dev/">
+      Continuar con TikTok
     </a>
   </div>
 
   <div class="card risk">
     <h2>Nivel de riesgo</h2>
+
     <div class="score">18</div>
+
     <div class="status">🟢 Riesgo bajo</div>
 
     <div class="bar">
@@ -178,7 +205,11 @@
 
   <div class="card">
     <h2>🛡️ Protección</h2>
-    <p>Live Seguro analiza posibles riesgos y genera alertas para ayudar a proteger al creador durante sus transmisiones.</p>
+
+    <p>
+      Live Seguro analiza posibles riesgos y genera alertas
+      para ayudar a proteger al creador durante sus transmisiones.
+    </p>
   </div>
 
 </div>
@@ -187,5 +218,34 @@
   Live Seguro · Seguridad para creadores de contenido
 </div>
 
+<script>
+
+  const params = new URLSearchParams(window.location.search);
+
+  const tiktokStatus = params.get("tiktok");
+  const name = params.get("name");
+
+  if (tiktokStatus === "connected") {
+
+    document.getElementById("connectedBox").style.display = "block";
+
+    document.getElementById("connectionText").textContent =
+      "Tu cuenta de TikTok está conectada correctamente.";
+
+    if (name) {
+      document.getElementById("accountName").textContent =
+        "👤 Cuenta: " + name;
+    } else {
+      document.getElementById("accountName").textContent =
+        "👤 Cuenta de TikTok conectada";
+    }
+
+    document.getElementById("tiktokButton").textContent =
+      "🔄 Volver a conectar";
+
+  }
+
+</script>
+
 </body>
-                                       </html>
+</html>
